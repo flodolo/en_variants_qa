@@ -120,34 +120,22 @@ class CheckStrings:
         locale_strings = {}
         self.extractStrings(repository_path, locale_strings)
 
-        with open(os.path.join(root_path, "exclusions", f"{locale}.json")) as f:
+        # Load exclusions
+        exclusions_file = os.path.join(root_path, "exclusions", f"{locale}.json")
+        with open(exclusions_file) as f:
             json_data = json.load(f)
             ignored_strings = json_data["exclusions"]
+            ignored_strings.sort()
 
-        spelling_changes = {
-            "en-CA": {
-                "behavior": "behaviour",
-                "behaviors": "behaviours",
-                "canceled": "cancelled",
-                "center": "centre",
-                "color": "colour",
-                "colors": "colours",
-                "colorful": "colourful",
-                "counterclockwise": "anti-clockwise",
-                "favorite": "favourite",
-                "favorites": "favourites",
-                "honors": "honours",
-                "labeled": "labelled",
-                "license": "licence",
-                "licenses": "licences",
-                "millimeters": "millimetres",
-                "moveable": "movable",
-                "neighborhood": "neighbourhood",
-                "oxidized": "oxidise",
-            }
-        }
+        # Write back formatted+sorted file
+        with open(exclusions_file, "w") as f:
+            json_data["exclusions"] = ignored_strings
+            json.dump(json_data, f, indent=2, sort_keys=True)
 
-        spelling = spelling_changes.get(locale, {})
+        # Load spelling changes
+        with open(os.path.join(root_path, "spelling", f"{locale}.json")) as f:
+            json_data = json.load(f)
+            spelling = json_data["spelling"]
 
         translation_differences = []
         case_differences = []
@@ -268,8 +256,13 @@ class CheckStrings:
                 print(f"Original: {self.reference_strings[id]}")
                 print(f"Translation: {locale_strings[id]}")
 
-                output_list = [li for li in difflib.ndiff(
-                    self.reference_strings[id], locale_strings[id]) if li[0] != ' ']
+                output_list = [
+                    li
+                    for li in difflib.ndiff(
+                        self.reference_strings[id], locale_strings[id]
+                    )
+                    if li[0] != " "
+                ]
                 print("Differences:")
                 print(" ".join(output_list))
 
@@ -299,10 +292,7 @@ def main():
         action="store_true",
         default=False,
     )
-    p.add_argument(
-        "locale",
-        help="Locale to check"
-    )
+    p.add_argument("locale", help="Locale to check")
     args = p.parse_args()
 
     l10n_repo_path = "/Users/flodolo/mozilla/mercurial/l10n_clones/locales"

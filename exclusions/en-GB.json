@@ -1,0 +1,21 @@
+{
+    "exclusions": [
+       "browser/browser/pageInfo.ftl:media-file-size",
+       "browser/browser/pageInfo.ftl:properties-general-size.value",
+       "browser/chrome/browser/browser.properties:safebrowsing.notAnAttackButton.accessKey",
+       "browser/extensions/formautofill/formautofill.properties:zip",
+       "browser/installer/override.properties:Kilo",
+       "browser/pdfviewer/chrome.properties:open_with_different_viewer.accessKey",
+       "browser/pdfviewer/viewer.properties:document_properties_kb",
+       "devtools/client/netmonitor.properties:charts.sizeKB",
+       "devtools/client/netmonitor.properties:charts.totalSize",
+       "devtools/client/netmonitor.properties:charts.totalTransferredSize",
+       "devtools/client/netmonitor.properties:charts.transferredSizeKB",
+       "devtools/client/netmonitor.properties:networkMenu.sizeKB",
+       "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
+       "devtools/shared/styleinspector.properties:styleinspector.contextmenu.copyColor.accessKey",
+       "toolkit/chrome/mozapps/downloads/downloads.properties:kilobyte",
+       "toolkit/toolkit/about/aboutPerformance.ftl:size-KB",
+       "toolkit/toolkit/about/aboutProcesses.ftl:memory-unit-KB"
+    ]
+}
