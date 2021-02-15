@@ -110,7 +110,7 @@ class CheckStrings:
 
         return relative_path
 
-    def compareLocale(self, locale, repository_path, write, update):
+    def compareLocale(self, locale, repository_path, write, update, root_path):
         """Extract strings for locale, compare to reference strings"""
 
         # Update repo
@@ -120,25 +120,9 @@ class CheckStrings:
         locale_strings = {}
         self.extractStrings(repository_path, locale_strings)
 
-        ignored_strings = [
-            "browser/browser/pageInfo.ftl:media-file-size",
-            "browser/browser/pageInfo.ftl:properties-general-size.value",
-            "browser/chrome/browser/browser.properties:safebrowsing.notAnAttackButton.accessKey",
-            "browser/extensions/formautofill/formautofill.properties:zip",
-            "browser/installer/override.properties:Kilo",
-            "browser/pdfviewer/chrome.properties:open_with_different_viewer.accessKey",
-            "browser/pdfviewer/viewer.properties:document_properties_kb",
-            "devtools/client/netmonitor.properties:charts.sizeKB",
-            "devtools/client/netmonitor.properties:charts.totalSize",
-            "devtools/client/netmonitor.properties:charts.totalTransferredSize",
-            "devtools/client/netmonitor.properties:charts.transferredSizeKB",
-            "devtools/client/netmonitor.properties:networkMenu.sizeKB",
-            "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
-            "devtools/shared/styleinspector.properties:styleinspector.contextmenu.copyColor.accessKey",
-            "toolkit/chrome/mozapps/downloads/downloads.properties:kilobyte",
-            "toolkit/toolkit/about/aboutPerformance.ftl:size-KB",
-            "toolkit/toolkit/about/aboutProcesses.ftl:memory-unit-KB",
-        ]
+        with open(os.path.join(root_path, "exclusions", f"{locale}.json")) as f:
+            json_data = json.load(f)
+            ignored_strings = json_data["exclusions"]
 
         spelling_changes = {
             "en-CA": {
@@ -203,8 +187,8 @@ class CheckStrings:
 
                     translation_differences.append(id)
 
-
         if case_differences:
+            case_differences.sort()
             print("\nDifferent case:")
             for id in case_differences:
                 print(f"\nID: {id}")
@@ -277,6 +261,7 @@ class CheckStrings:
                     f.writelines(updated_content)
 
         if translation_differences:
+            translation_differences.sort()
             print("\nDifferent translations:")
             for id in translation_differences:
                 print(f"\nID: {id}")
@@ -288,9 +273,16 @@ class CheckStrings:
                 print("Differences:")
                 print(" ".join(output_list))
 
+        all_differences = {
+            "case": case_differences,
+            "spelling": translation_differences,
+        }
+        with open(os.path.join(root_path, "output", f"{locale}.json"), "w") as f:
+            json.dump(all_differences, f, indent=2, sort_keys=True)
+
 
 def main():
-    script_path = os.path.abspath(os.path.dirname(__file__))
+    root_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
 
     p = argparse.ArgumentParser(
         description="Display and remove capitalization differences for English localizations"
@@ -320,7 +312,7 @@ def main():
 
     check = CheckStrings("/Users/flodolo/mozilla/mercurial/gecko-strings-quarantine")
     print(f"Checking {args.locale}\n-------\n")
-    check.compareLocale(args.locale, repo_path, args.write, args.update)
+    check.compareLocale(args.locale, repo_path, args.write, args.update, root_path)
 
 
 if __name__ == "__main__":
