@@ -168,7 +168,19 @@ class CheckStrings:
                     source = source.lower()
                     translation = translation.lower()
                     for word, replacement in spelling.items():
-                        source = re.sub(r"\b{}\b".format(word), replacement, source)
+                        if not isinstance(replacement, list):
+                            source = re.sub(
+                                r"\b(?<![$-]){}\b".format(word), replacement, source
+                            )
+                        else:
+                            for r in replacement:
+                                # Negative lookbehind is used to avoid replacing term and variable names
+                                source_tmp = re.sub(
+                                    r"\b(?<![$-]){}\b".format(word), r, source
+                                )
+                                if source_tmp == translation:
+                                    source = source_tmp
+                                    break
 
                     if source == translation:
                         continue

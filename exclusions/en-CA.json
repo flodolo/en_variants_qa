@@ -44,8 +44,6 @@
     "toolkit/chrome/global/extensions.properties:csp.error.missing-host",
     "toolkit/chrome/global/extensions.properties:csp.error.missing-source",
     "toolkit/chrome/global/intl.properties:intl.accept_languages",
-    "toolkit/chrome/global/keys.properties:VK_DELETE",
-    "toolkit/chrome/global/keys.properties:VK_INSERT",
     "toolkit/chrome/global/mozilla.dtd:mozilla.quote.11.14",
     "toolkit/chrome/global/printdialog.properties:printBGColors",
     "toolkit/chrome/mozapps/downloads/downloads.properties:kilobyte",
