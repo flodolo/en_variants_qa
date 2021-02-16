@@ -137,8 +137,10 @@ class CheckStrings:
             json_data = json.load(f)
             spelling = json_data["spelling"]
 
-        translation_differences = []
-        case_differences = []
+        differences = {
+            "case": [],
+            "spelling": [],
+        }
         for id, translation in locale_strings.items():
             # Ignore obsolete strings
             if id not in self.reference_strings:
@@ -162,7 +164,7 @@ class CheckStrings:
                 if translation == source:
                     continue
                 if translation.lower() == source.lower():
-                    case_differences.append(id)
+                    differences["case"].append(id)
                 else:
                     # Clean up translation differences due to spelling
                     source = source.lower()
@@ -185,12 +187,11 @@ class CheckStrings:
                     if source == translation:
                         continue
 
-                    translation_differences.append(id)
+                    differences["spelling"].append(id)
 
-        if case_differences:
-            case_differences.sort()
+        if differences["case"]:
             print("\nDifferent case:")
-            for id in case_differences:
+            for id in differences["case"]:
                 print(f"\nID: {id}")
                 print(f"Source: {self.reference_strings[id]}")
                 print(f"Translation: {locale_strings[id]}")
@@ -198,7 +199,7 @@ class CheckStrings:
         if write:
             # Organize them by file, to avoid opening the same file multiple times
             fixes = {}
-            for id in case_differences:
+            for id in differences["case"]:
                 filename = id.split(":")[0]
                 if filename not in fixes:
                     fixes[filename] = [id]
@@ -260,10 +261,9 @@ class CheckStrings:
                 with open(filename, "w") as f:
                     f.writelines(updated_content)
 
-        if translation_differences:
-            translation_differences.sort()
+        if differences["spelling"]:
             print("\nDifferent translations:")
-            for id in translation_differences:
+            for id in differences["spelling"]:
                 print(f"\nID: {id}")
                 print(f"Original: {self.reference_strings[id]}")
                 print(f"Translation: {locale_strings[id]}")
@@ -278,12 +278,8 @@ class CheckStrings:
                 print("Differences:")
                 print(" ".join(output_list))
 
-        all_differences = {
-            "case": case_differences,
-            "spelling": translation_differences,
-        }
         with open(os.path.join(root_path, "output", f"{locale}.json"), "w") as f:
-            json.dump(all_differences, f, indent=2, sort_keys=True)
+            json.dump(differences, f, indent=2, sort_keys=True)
 
 
 def main():
