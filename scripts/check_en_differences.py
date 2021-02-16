@@ -166,10 +166,8 @@ class CheckStrings:
                         differences["case"].append(id)
                 else:
                     # Clean up translation differences due to spelling
-                    source = source.lower()
-                    translation = translation.lower()
 
-                    # Initially, the only variation is the lower case source
+                    # Initially, the only variation is the source string
                     variations = [source]
 
                     for word, replacement in spelling.items():
