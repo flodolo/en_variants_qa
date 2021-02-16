@@ -28,7 +28,6 @@
     "browser/chrome/overrides/settingsChange.dtd:settingsChangePreferences.label",
     "browser/chrome/overrides/settingsChange.dtd:settingsChangeOptions.label",
     "browser/extensions/formautofill/formautofill.properties:zip",
-    "browser/installer/custom.properties:UN_REFRESH_PAGE_EXPLANATION",
     "devtools/client/application.ftl:manifest-icon-purpose",
     "devtools/client/application.ftl:manifest-icon-img-title",
     "devtools/client/perftools.ftl:perftools-range-interval-milliseconds",
@@ -58,11 +57,6 @@
     "toolkit/crashreporter/crashreporter.ini:ErrorCreateDumpDir",
     "toolkit/defines.inc:MOZ_LANG_TITLE",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size",
-    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
-    "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
-    "toolkit/toolkit/about/aboutRights.ftl:rights-webservices",
-    "toolkit/toolkit/about/aboutRights.ftl:rights-safebrowsing-term-3",
-    "toolkit/toolkit/about/aboutRights.ftl:rights-webservices-term-4",
-    "toolkit/toolkit/featuregates/features.ftl:experimental-features-fission-description"
+    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change"
   ]
 }

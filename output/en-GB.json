@@ -1,4 +1,6 @@
 {
   "case": [],
-  "spelling": []
+  "spelling": [
+    "toolkit/toolkit/featuregates/features.ftl:experimental-features-fission-description"
+  ]
 }
