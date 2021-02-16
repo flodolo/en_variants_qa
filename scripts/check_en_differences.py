@@ -123,14 +123,7 @@ class CheckStrings:
         # Load exclusions
         exclusions_file = os.path.join(root_path, "exclusions", f"{locale}.json")
         with open(exclusions_file) as f:
-            json_data = json.load(f)
-            ignored_strings = json_data["exclusions"]
-            ignored_strings.sort()
-
-        # Write back formatted+sorted file
-        with open(exclusions_file, "w") as f:
-            json_data["exclusions"] = ignored_strings
-            json.dump(json_data, f, indent=2, sort_keys=True)
+            ignored_strings = json.load(f)
 
         # Load spelling changes
         with open(os.path.join(root_path, "spelling", f"{locale}.json")) as f:
@@ -141,6 +134,13 @@ class CheckStrings:
             "case": [],
             "spelling": [],
         }
+
+        # Store used exceptions to clean up the file later
+        used_exceptions = {
+            "case": [],
+            "spelling": [],
+        }
+
         for id, translation in locale_strings.items():
             # Ignore obsolete strings
             if id not in self.reference_strings:
@@ -148,10 +148,6 @@ class CheckStrings:
 
             # Ignore accesskey and shortcuts
             if id.endswith((".key", ".accesskey")):
-                continue
-
-            # Ignore other strings
-            if id in ignored_strings:
                 continue
 
             # Check differences
@@ -164,7 +160,10 @@ class CheckStrings:
                 if translation == source:
                     continue
                 if translation.lower() == source.lower():
-                    differences["case"].append(id)
+                    if id in ignored_strings["case"]:
+                        used_exceptions["case"].append(id)
+                    else:
+                        differences["case"].append(id)
                 else:
                     # Clean up translation differences due to spelling
                     source = source.lower()
@@ -187,7 +186,10 @@ class CheckStrings:
                     if source == translation:
                         continue
 
-                    differences["spelling"].append(id)
+                    if id in ignored_strings["spelling"]:
+                        used_exceptions["spelling"].append(id)
+                    else:
+                        differences["spelling"].append(id)
 
         if differences["case"]:
             print("\nDifferent case:")
@@ -280,6 +282,10 @@ class CheckStrings:
 
         with open(os.path.join(root_path, "output", f"{locale}.json"), "w") as f:
             json.dump(differences, f, indent=2, sort_keys=True)
+
+        # Write back updated exceptions
+        with open(exclusions_file, "w") as f:
+            json.dump(used_exceptions, f, indent=2, sort_keys=True)
 
 
 def main():
