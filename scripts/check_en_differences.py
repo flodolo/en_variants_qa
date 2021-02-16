@@ -168,28 +168,39 @@ class CheckStrings:
                     # Clean up translation differences due to spelling
                     source = source.lower()
                     translation = translation.lower()
+
+                    # Initially, the only variation is the lower case source
+                    variations = [source]
+
                     for word, replacement in spelling.items():
                         if not isinstance(replacement, list):
-                            source = re.sub(
-                                r"\b(?<![$-]){}\b".format(word), replacement, source
-                            )
+                            for v in variations[:]:
+                                # Negative lookbehind is used to avoid replacing term and variable names
+                                tmp_v = re.sub(
+                                    r"\b(?<![$-]){}\b".format(word), replacement, v
+                                )
+                                if tmp_v not in variations:
+                                    variations.append(tmp_v)
                         else:
                             for r in replacement:
-                                # Negative lookbehind is used to avoid replacing term and variable names
-                                source_tmp = re.sub(
-                                    r"\b(?<![$-]){}\b".format(word), r, source
-                                )
-                                if source_tmp == translation:
-                                    source = source_tmp
-                                    break
+                                for v in variations[:]:
+                                    tmp_v = re.sub(
+                                        r"\b(?<![$-]){}\b".format(word), r, v
+                                    )
+                                    if tmp_v not in variations:
+                                        variations.append(tmp_v)
 
-                    if source == translation:
-                        continue
+                    spelling_ok = False
+                    for v in variations:
+                        if translation == v:
+                            spelling_ok = True
+                            break
 
-                    if id in ignored_strings["spelling"]:
-                        used_exceptions["spelling"].append(id)
-                    else:
-                        differences["spelling"].append(id)
+                    if not spelling_ok:
+                        if id in ignored_strings["spelling"]:
+                            used_exceptions["spelling"].append(id)
+                        else:
+                            differences["spelling"].append(id)
 
         if differences["case"]:
             print("\nDifferent case:")

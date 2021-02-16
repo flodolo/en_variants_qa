@@ -29,7 +29,6 @@
     "browser/browser/preferences/fonts.ftl:fonts-sans-serif",
     "browser/browser/screenshots.ftl:screenshots-notification-link-copied-details",
     "browser/browser/screenshots.ftl:screenshots-notification-image-copied-details",
-    "browser/chrome/overrides/netError.dtd:fileNotFound.longDesc",
     "browser/defines.inc:MOZ_LANGPACK_CREATOR",
     "browser/extensions/formautofill/formautofill.properties:postalCode",
     "browser/installer/nsisstrings.properties:ERROR_DOWNLOAD_CONT",
@@ -53,7 +52,6 @@
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
     "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
-    "toolkit/toolkit/about/aboutSupport.ftl:page-subtitle",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-inc-state-province",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province"
   ]
