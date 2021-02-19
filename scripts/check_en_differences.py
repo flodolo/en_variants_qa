@@ -68,6 +68,8 @@ class CheckStrings:
     def extractStrings(self, repository_path, strings):
         """Extract strings in files"""
 
+        fluent_ids = {}
+
         # Create a list of files to analyze
         file_list = self.extractFileList(repository_path)
 
@@ -89,6 +91,13 @@ class CheckStrings:
 
                     string_id = "{}:{}".format(file_name, entity)
                     if file_extension == ".ftl":
+
+                        s_entity = str(entity)
+                        if s_entity in fluent_ids:
+                            fluent_ids[s_entity] += 1
+                        else:
+                            fluent_ids[s_entity] = 1
+
                         if entity.raw_val != "":
                             strings[string_id] = entity.raw_val
                         # Store attributes
@@ -102,6 +111,52 @@ class CheckStrings:
             except Exception as e:
                 print("Error parsing file: {}".format(file_path))
                 print(e)
+
+        avg_len = 0
+        max_len = 0
+        max_id = ""
+        min_len = 0
+        min_id = ""
+        total_ids = 0
+        total_len = 0
+        threshold = 9
+        under_threshold_ids = []
+        for id, reps in fluent_ids.items():
+            id_len = len(id)
+
+            # Initialize
+            if max_len == 0:
+                max_len = id_len
+                max_id = id
+            if min_len == 0:
+                min_len = id_len
+                min_id = id
+
+            total_ids += reps
+            if reps > 1:
+                print(f"{id}: {reps}")
+            total_len += reps * id_len
+
+            if id_len > max_len:
+                max_len = id_len
+                max_id = id
+
+            if id_len < min_len:
+                min_len = id_len
+                min_id = id
+
+            if id_len < threshold:
+                under_threshold_ids.append(id)
+
+        avg_length = float(total_len) / total_ids
+        print(f"Total ids: {total_ids}")
+        print(f"Average length: {avg_length}")
+        print(f"Min length: {min_len} {min_id}")
+        print(f"Max length: {max_len} {max_id}")
+
+        print(f"Under threshold {threshold}: {len(under_threshold_ids)}")
+        under_threshold_ids.sort()
+        print("\n".join(under_threshold_ids))
 
     def getRelativePath(self, file_name, repository_path):
         """Get the relative path of a filename"""
@@ -324,6 +379,7 @@ def main():
         sys.exit(f"Path to repository {repo_path} does not exist.")
 
     check = CheckStrings("/Users/flodolo/mozilla/mercurial/gecko-strings-quarantine")
+    sys.exit()
     print(f"Checking {args.locale}\n-------\n")
     check.compareLocale(args.locale, repo_path, args.write, args.update, root_path)
 
