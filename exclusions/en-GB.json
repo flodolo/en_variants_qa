@@ -53,6 +53,7 @@
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
     "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-inc-state-province",
-    "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province"
+    "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province",
+    "toolkit/toolkit/about/aboutHttpsOnlyError.ftl:about-httpsonly-suggestion-box-www-text"
   ]
 }
