@@ -18,6 +18,7 @@
     "toolkit/toolkit/about/aboutProcesses.ftl:memory-unit-KB"
   ],
   "spelling": [
+    "browser/browser/newInstallPage.ftl:new-install-sync-first",
     "browser/browser/newtab/asrouter.ftl:cfr-whatsnew-cross-site-tracking-body",
     "browser/browser/nsserrors.ftl:sec-error-bad-info-access-location",
     "browser/browser/nsserrors.ftl:sec-error-libpkix-internal",
