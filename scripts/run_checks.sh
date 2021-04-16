@@ -29,3 +29,6 @@ source $root_path/python-venv/bin/activate || exit 1
 
 # Running main script
 python $script_path/check_en_differences.py $@
+
+# Reformat resulting JSON
+python $script_path/reformat_json.py
