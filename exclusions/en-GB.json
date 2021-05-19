@@ -52,6 +52,8 @@
     "toolkit/defines.inc:MOZ_LANG_TITLE",
     "toolkit/toolkit/about/aboutHttpsOnlyError.ftl:about-httpsonly-suggestion-box-www-text",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size",
+    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed",
+    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed.title",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
     "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-inc-state-province",
