@@ -146,14 +146,16 @@ class CheckStrings:
             if id not in self.reference_strings:
                 continue
 
-            # Ignore accesskey and shortcuts
+            source = self.reference_strings[id]
+
+            # For accesskey and shortcuts, transform both source and
+            # translation to lowercase to avoid false positives
             if id.endswith((".key", ".accesskey")):
-                continue
+                source = source.lower()
+                translation = translation.lower()
 
             # Check differences
-            if translation != self.reference_strings[id]:
-                source = self.reference_strings[id]
-
+            if translation != source:
                 # Try cleaning up spaces (trailing, leading, multiple)
                 translation = " ".join(translation.strip().split()).replace("\n", " ")
                 source = " ".join(source.strip().split()).replace("\n", " ")
