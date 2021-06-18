@@ -18,8 +18,11 @@
     "toolkit/toolkit/about/aboutProcesses.ftl:memory-unit-KB"
   ],
   "spelling": [
-    "browser/browser/newInstallPage.ftl:new-install-sync-first",
-    "browser/browser/newtab/asrouter.ftl:cfr-whatsnew-cross-site-tracking-body",
+    "browser/browser/browserSets.ftl:full-zoom-enlarge-shortcut-alt2.key",
+    "browser/browser/browserSets.ftl:full-zoom-reduce-shortcut-alt-b.key",
+    "browser/browser/browserSets.ftl:full-zoom-reset-shortcut-alt.key",
+    "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-alt.key",
+    "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-mac-alt.key",
     "browser/browser/nsserrors.ftl:sec-error-bad-info-access-location",
     "browser/browser/nsserrors.ftl:sec-error-libpkix-internal",
     "browser/browser/nsserrors.ftl:sec-error-out-of-search-limits",
@@ -51,7 +54,6 @@
     "toolkit/chrome/global/printdialog.properties:printBGColors",
     "toolkit/defines.inc:MOZ_LANG_TITLE",
     "toolkit/toolkit/about/aboutHttpsOnlyError.ftl:about-httpsonly-suggestion-box-www-text",
-    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed.title",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",

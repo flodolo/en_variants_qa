@@ -1,5 +1,6 @@
 {
   "spelling": {
+    ", and": " and",
     "Analyze": "Analyse",
     "Anonymize": "Anonymise",
     "Back": "Backwards",
@@ -9,6 +10,8 @@
     "Check": "Tick",
     "Color": "Colour",
     "Colors": "Colours",
+    "Colorway": "Colourway",
+    "Colorways": "Colourways",
     "Counterclockwise": "Anti-Clockwise",
     "Customize": "Customise",
     "Deserialize": "Deserialise",
@@ -74,6 +77,8 @@
     "color": "colour",
     "colorful": "colourful",
     "colors": "colours",
+    "colorway": "colourway",
+    "colorways": "colourways",
     "counterclockwise": "anti-clockwise",
     "customizations": "customisations",
     "customize": "customise",
