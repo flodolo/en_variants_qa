@@ -19,10 +19,13 @@
     "browser/browser/browserSets.ftl:full-zoom-reset-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-mac-alt.key",
+    "browser/browser/downloads.ftl:downloads-files-not-downloaded",
+    "browser/browser/newtab/asrouter.ftl:spotlight-better-internet-body",
     "browser/browser/nsserrors.ftl:sec-error-bad-info-access-location",
     "browser/browser/nsserrors.ftl:sec-error-libpkix-internal",
     "browser/browser/nsserrors.ftl:sec-error-out-of-search-limits",
     "browser/browser/nsserrors.ftl:sec-error-policy-validation-failed",
+    "browser/browser/preferences/preferences.ftl:preferences-web-appearance-override-warning",
     "browser/browser/screenshots.ftl:screenshots-notification-image-copied-details",
     "browser/browser/screenshots.ftl:screenshots-notification-link-copied-details",
     "browser/chrome/browser/browser.dtd:editPopupSettings.label",
@@ -57,6 +60,11 @@
     "toolkit/defines.inc:MOZ_LANG_TITLE",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed.title",
-    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change"
+    "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-illegal-host-wildcard",
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-illegal-keyword",
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-illegal-protocol",
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-missing-host",
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-missing-source"
   ]
 }

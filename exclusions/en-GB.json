@@ -23,6 +23,8 @@
     "browser/browser/browserSets.ftl:full-zoom-reset-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-mac-alt.key",
+    "browser/browser/downloads.ftl:downloads-files-not-downloaded",
+    "browser/browser/newtab/asrouter.ftl:spotlight-better-internet-body",
     "browser/browser/nsserrors.ftl:sec-error-bad-info-access-location",
     "browser/browser/nsserrors.ftl:sec-error-libpkix-internal",
     "browser/browser/nsserrors.ftl:sec-error-out-of-search-limits",
@@ -31,6 +33,7 @@
     "browser/browser/preferences/containers.ftl:containers-icon-cart.label",
     "browser/browser/preferences/containers.ftl:containers-icon-vacation.label",
     "browser/browser/preferences/fonts.ftl:fonts-sans-serif",
+    "browser/browser/preferences/preferences.ftl:preferences-web-appearance-override-warning",
     "browser/browser/screenshots.ftl:screenshots-notification-image-copied-details",
     "browser/browser/screenshots.ftl:screenshots-notification-link-copied-details",
     "browser/defines.inc:MOZ_LANGPACK_CREATOR",
@@ -58,6 +61,7 @@
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-changed.title",
     "toolkit/toolkit/about/aboutProcesses.ftl:about-processes-total-memory-size-no-change",
     "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
+    "toolkit/toolkit/about/abuseReports.ftl:abuse-report-broken-suggestions-sitepermission",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-inc-state-province",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province"
   ]
