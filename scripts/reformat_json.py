@@ -32,7 +32,7 @@ def main():
         reorder_node(json_data)
 
         with open(filename, "w") as f:
-            json.dump(json_data, f, indent=2, sort_keys=True)
+            json.dump(json_data, f, indent=2, sort_keys=True, ensure_ascii=False),
 
 
 if __name__ == "__main__":

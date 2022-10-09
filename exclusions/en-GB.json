@@ -24,7 +24,6 @@
     "browser/browser/browserSets.ftl:full-zoom-reset-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-alt.key",
     "browser/browser/browserSets.ftl:picture-in-picture-toggle-shortcut-mac-alt.key",
-    "browser/browser/colorways.ftl:dreamer-colorway-description",
     "browser/browser/downloads.ftl:downloads-files-not-downloaded",
     "browser/browser/newtab/asrouter.ftl:spotlight-better-internet-body",
     "browser/browser/nsserrors.ftl:sec-error-bad-info-access-location",
@@ -67,6 +66,10 @@
     "toolkit/toolkit/about/aboutRights.ftl:rights-intro-point-5-unbranded",
     "toolkit/toolkit/about/abuseReports.ftl:abuse-report-broken-suggestions-sitepermission",
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-inc-state-province",
-    "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province"
+    "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-bad-info-access-location",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-libpkix-internal",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-out-of-search-limits",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-policy-validation-failed"
   ]
 }

@@ -60,6 +60,10 @@
     "toolkit/toolkit/global/cspErrors.ftl:csp-error-illegal-keyword",
     "toolkit/toolkit/global/cspErrors.ftl:csp-error-illegal-protocol",
     "toolkit/toolkit/global/cspErrors.ftl:csp-error-missing-host",
-    "toolkit/toolkit/global/cspErrors.ftl:csp-error-missing-source"
+    "toolkit/toolkit/global/cspErrors.ftl:csp-error-missing-source",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-bad-info-access-location",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-libpkix-internal",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-out-of-search-limits",
+    "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-policy-validation-failed"
   ]
 }
