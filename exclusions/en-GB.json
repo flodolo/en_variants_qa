@@ -11,9 +11,12 @@
     "toolkit/toolkit/about/aboutPerformance.ftl:size-KB",
     "toolkit/toolkit/about/aboutProcesses.ftl:memory-unit-KB",
     "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte",
+    "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-cancel-button.accessKey",
+    "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-save-new-button.accessKey",
     "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-kb"
   ],
   "spelling": [
+    "browser/browser/aboutLogins.ftl:about-logins-confirm-remove-all-sync-dialog-message3",
     "browser/browser/aboutPrivateBrowsing.ftl:about-private-browsing-felt-privacy-v1-info-body",
     "browser/browser/addonNotifications.ftl:addon-confirm-install-message",
     "browser/browser/addonNotifications.ftl:addon-confirm-install-some-unsigned-message",
@@ -29,6 +32,7 @@
     "browser/browser/downloads.ftl:downloads-files-not-downloaded",
     "browser/browser/firefoxView.ftl:firefoxview-syncedtabs-loading-header",
     "browser/browser/newtab/asrouter.ftl:spotlight-better-internet-body",
+    "browser/browser/newtab/onboarding.ftl:onboarding-mobile-download-security-and-privacy-subtitle",
     "browser/browser/pageInfo.ftl:security-view-privacy-history-value",
     "browser/browser/preferences/containers.ftl:containers-icon-cart.label",
     "browser/browser/preferences/containers.ftl:containers-icon-vacation.label",
