@@ -38,16 +38,7 @@ class CheckStrings:
         """Extract the list of supported files"""
 
         excluded_folders = [
-            "calendar",
-            "chat",
             "dom",
-            "editor",
-            "extensions",
-            "mail",
-            "mobile",
-            "other-licenses",
-            "security",
-            "suite",
         ]
 
         file_list = []
@@ -205,7 +196,7 @@ class CheckStrings:
             print("\nDifferent case:")
             for id in differences["case"]:
                 print(f"\nID: {id}")
-                print(f"Source: {self.reference_strings[id]}")
+                print(f"Source:      {self.reference_strings[id]}")
                 print(f"Translation: {locale_strings[id]}")
 
         if write:
@@ -277,7 +268,7 @@ class CheckStrings:
             print("\nDifferent translations:")
             for id in differences["spelling"]:
                 print(f"\nID: {id}")
-                print(f"Original: {self.reference_strings[id]}")
+                print(f"Original:    {self.reference_strings[id]}")
                 print(f"Translation: {locale_strings[id]}")
 
                 output_list = [
@@ -324,7 +315,7 @@ def main():
     if not os.path.isdir(repo_path):
         sys.exit(f"Path to repository {repo_path} does not exist.")
 
-    check = CheckStrings("/Users/flodolo/mozilla/mercurial/gecko-strings-quarantine")
+    check = CheckStrings("/Users/flodolo/mozilla/mercurial/firefox-quarantine")
     print(f"Checking {args.locale}\n-------\n")
     check.compareLocale(args.locale, repo_path, args.write, args.update, root_path)
 

@@ -19,6 +19,8 @@
     "Dialog": "Dialogue",
     "Dialogs": "Dialogues",
     "Digitizer": "Digitiser",
+    "E-Mail": "Email",
+    "E-mail": "Email",
     "Enrollment": "Enrolment",
     "Enrollments": "Enrolments",
     "Favorites": "Favourites",
@@ -50,6 +52,7 @@
       "Synchronising"
     ],
     "Uncheck": "Untick",
+    "Uninitialized": "Uninitialised",
     "Unrecognized": "Unrecognised",
     "Visualize": "Visualise",
     "Webpage": [
@@ -92,6 +95,7 @@
     "deserialize": "deserialise",
     "dialog": "dialogue",
     "dialogs": "dialogues",
+    "e-mail": "email",
     "enrollment": "enrolment",
     "enrollments": "enrolments",
     "favorite": "favourite",
@@ -118,6 +122,7 @@
     "optimizing": "optimising",
     "organization": "organisation",
     "organizational": "organisational",
+    "organizations": "organisations",
     "organize": "organise",
     "oxidized": "oxidise",
     "personalize": "personalise",
@@ -138,6 +143,8 @@
       "synchronisation",
       "synchronising"
     ],
+    "traveled": "travelled",
+    "traveling": "travelling",
     "unauthorized": "unauthorised",
     "uncheck": "untick",
     "uninitialized": "uninitialised",

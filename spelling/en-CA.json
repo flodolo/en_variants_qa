@@ -7,6 +7,8 @@
     "Colors": "Colours",
     "Colorway": "Colourway",
     "Colorways": "Colourways",
+    "E-Mail": "Email",
+    "E-mail": "Email",
     "Enrollment": "Enrolment",
     "Enrollments": "Enrolments",
     "Favorites": "Favourites",
@@ -24,6 +26,7 @@
     "colorways": "colourways",
     "counterclockwise": "anti-clockwise",
     "defense": "defence",
+    "e-mail": "email",
     "enrollment": "enrolment",
     "enrollments": "enrolments",
     "favorite": "favourite",
@@ -37,6 +40,8 @@
     "millimeters": "millimetres",
     "moveable": "movable",
     "neighborhood": "neighbourhood",
-    "oxidized": "oxidise"
+    "oxidized": "oxidise",
+    "traveled": "travelled",
+    "traveling": "travelling"
   }
 }
