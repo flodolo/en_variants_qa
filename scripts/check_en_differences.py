@@ -7,7 +7,6 @@ import json
 import re
 import subprocess
 import sys
-from html.parser import HTMLParser
 
 # Import libraries
 try:

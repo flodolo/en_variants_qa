@@ -4,6 +4,7 @@ import glob
 import json
 import os
 
+
 def reorder_node(node):
     """Reorder arrays in nodes recursively"""
 
@@ -18,6 +19,7 @@ def reorder_node(node):
     if isinstance(node, dict):
         for key, sub_node in node.items():
             reorder_node(node[key])
+
 
 def main():
     root_path = os.path.abspath(
