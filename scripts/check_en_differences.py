@@ -105,10 +105,10 @@ class CheckStrings:
 
         # Update repo
         if update:
-            subprocess.run(["hg", "-R", repository_path, "pull", "-u"])
+            subprocess.run(["git", "-C", repository_path, "pull"])
 
         locale_strings = {}
-        self.extractStrings(repository_path, locale_strings)
+        self.extractStrings(os.path.join(repository_path, locale), locale_strings)
 
         # Load exclusions
         exclusions_file = os.path.join(root_path, "exclusions", f"{locale}.json")
@@ -310,8 +310,7 @@ def main():
     p.add_argument("locale", help="Locale to check")
     args = p.parse_args()
 
-    l10n_repo_path = "/Users/flodolo/mozilla/mercurial/l10n_clones/locales"
-    repo_path = f"{l10n_repo_path}/{args.locale}"
+    repo_path = "/Users/flodolo/mozilla/mercurial/firefox-l10n"
     if not os.path.isdir(repo_path):
         sys.exit(f"Path to repository {repo_path} does not exist.")
 
