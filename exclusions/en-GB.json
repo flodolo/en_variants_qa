@@ -57,6 +57,7 @@
     "devtools/client/perftools.ftl:perftools-range-interval-milliseconds",
     "devtools/client/tooltips.ftl:inactive-css-position-property-on-unpositioned-box-fix",
     "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
+    "netwerk/necko.properties:CookieAttributeIgnored",
     "security/manager/chrome/pipnss/nsserrors.properties:SEC_ERROR_BAD_INFO_ACCESS_LOCATION",
     "security/manager/chrome/pipnss/nsserrors.properties:SEC_ERROR_LIBPKIX_INTERNAL",
     "security/manager/chrome/pipnss/nsserrors.properties:SEC_ERROR_OUT_OF_SEARCH_LIMITS",
