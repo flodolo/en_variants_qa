@@ -131,6 +131,9 @@ class CheckStrings:
             "spelling": [],
         }
 
+        # Regular expressions to filter out some syntax
+        number_pattern = re.compile(r"NUMBER\(([^\)]+)\)")
+
         for id, translation in locale_strings.items():
             # Ignore obsolete strings
             if id not in self.reference_strings:
@@ -149,6 +152,13 @@ class CheckStrings:
                 # Try cleaning up spaces (trailing, leading, multiple)
                 translation = " ".join(translation.strip().split()).replace("\n", " ")
                 source = " ".join(source.strip().split()).replace("\n", " ")
+                # Remove NUMBER() function from both source and translation
+                source = re.sub(number_pattern, r"\1", source)
+                translation = re.sub(number_pattern, r"\1", translation)
+                # Try converting unicode endpoints to unicode characters
+                if r"\u" in translation:
+                    translation = translation.encode("utf8").decode("unicode-escape")
+
                 if translation == source:
                     continue
                 if translation.lower() == source.lower():
