@@ -40,6 +40,7 @@
     "Organize": "Organise",
     "Personalize": "Personalise",
     "Serialize": "Serialise",
+    "Summarize": "Summarise",
     "Sync": [
       "Synchronisation",
       "Synchronise"
@@ -133,6 +134,7 @@
     "recognize": "recognise",
     "recognized": "recognised",
     "serialize": "serialise",
+    "summarize": "summarise",
     "sync": [
       "synchronisation",
       "synchronise"
