@@ -27,6 +27,7 @@
     "browser/browser/firefoxView.ftl:firefoxview-syncedtabs-loading-header",
     "browser/browser/genai.ftl:genai-prompts-summarize.value",
     "browser/browser/newtab/newtab.ftl:newtab-topic-selection-subtitle",
+    "browser/browser/newtab/onboarding.ftl:onboarding-genai-sidebar-subtitle",
     "browser/browser/newtab/onboarding.ftl:onboarding-mobile-download-security-and-privacy-subtitle",
     "browser/browser/pageInfo.ftl:security-view-privacy-history-value",
     "browser/browser/preferences/containers.ftl:containers-icon-cart.label",
