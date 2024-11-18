@@ -146,6 +146,9 @@
       "synchronisation",
       "synchronising"
     ],
+    "syncs": [
+      "synchronises"
+    ],
     "traveled": "travelled",
     "traveling": "travelling",
     "unauthorized": "unauthorised",
@@ -153,6 +156,8 @@
     "uninitialized": "uninitialised",
     "unrecognizable": "unrecognisable",
     "unrecognized": "unrecognised",
+    "visualization": "visualisation",
+    "visualizations": "visualisations",
     "visualize": "visualise",
     "webpage": "web page",
     "webpages": "web pages",
