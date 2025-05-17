@@ -320,11 +320,11 @@ def main():
     p.add_argument("locale", help="Locale to check")
     args = p.parse_args()
 
-    repo_path = "/Users/flodolo/mozilla/mercurial/firefox-l10n"
+    repo_path = "/Users/flodolo/mozilla/git/firefox-l10n"
     if not os.path.isdir(repo_path):
         sys.exit(f"Path to repository {repo_path} does not exist.")
 
-    check = CheckStrings("/Users/flodolo/mozilla/mercurial/firefox-quarantine")
+    check = CheckStrings("/Users/flodolo/mozilla/git/firefox-quarantine")
     print(f"Checking {args.locale}\n-------\n")
     check.compareLocale(args.locale, repo_path, args.write, args.update, root_path)
 
