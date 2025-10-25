@@ -13,7 +13,6 @@
     "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte",
     "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-cancel-button.accessKey",
     "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-save-new-button.accessKey",
-    "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-kb",
     "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-size-kb"
   ],
   "spelling": [
@@ -66,6 +65,7 @@
     "toolkit/toolkit/about/certviewer.ftl:certificate-viewer-state-province",
     "toolkit/toolkit/featuregates/features.ftl:experimental-features-web-gpu-description3",
     "toolkit/toolkit/global/extensions.ftl:webext-site-perms-description-gated-perms-midi",
+    "toolkit/toolkit/neterror/netError.ftl:fp-neterror-http-auth-disabled-intro",
     "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-bad-info-access-location",
     "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-libpkix-internal",
     "toolkit/toolkit/neterror/nsserrors.ftl:sec-error-out-of-search-limits",
