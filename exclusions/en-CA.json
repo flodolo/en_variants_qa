@@ -6,8 +6,7 @@
     "browser/pdfviewer/chrome.properties:open_with_different_viewer.accessKey",
     "browser/pdfviewer/viewer.properties:document_properties_kb",
     "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
-    "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte",
-    "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-kb"
+    "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte"
   ],
   "spelling": [
     "browser/browser/addonNotifications.ftl:addon-confirm-install-message",
@@ -20,7 +19,6 @@
     "browser/browser/newtab/newtab.ftl:newtab-wallpaper-hot-air-balloons",
     "browser/browser/preferences/formAutofill.ftl:autofill-address-zip",
     "browser/browser/preferences/preferences.ftl:preferences-web-appearance-override-warning",
-    "browser/browser/shopping.ftl:shopping-onboarding-opt-in-privacy-policy-and-terms-of-use3",
     "browser/browser/sync.ftl:fxa-menu-send-tab-to-device.label",
     "browser/browser/tabbrowser.ftl:tabbrowser-confirm-close-tabs-title",
     "browser/browser/tabbrowser.ftl:tabbrowser-confirm-close-windows-title",

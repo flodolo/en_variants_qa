@@ -1,4 +1,8 @@
 {
   "case": [],
-  "spelling": []
+  "spelling": [
+    "browser/browser/genai.ftl:genai-menu-ask-generic-2.accesskey",
+    "browser/browser/genai.ftl:genai-menu-ask-provider-2.accesskey",
+    "browser/browser/genai.ftl:genai-menu-no-provider-2.accesskey"
+  ]
 }

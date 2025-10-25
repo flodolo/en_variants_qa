@@ -27,6 +27,7 @@
     "Forward": "Forwards",
     "Initializing": "Initialising",
     "Internationalization": "Internationalisation",
+    "Labeled": "Labelled",
     "License": "Licence",
     "Localization": "Localisation",
     "Maximize": "Maximise",
@@ -39,8 +40,10 @@
     "Organizational": "Organisational",
     "Organize": "Organise",
     "Personalize": "Personalise",
+    "Personalized": "Personalised",
     "Serialize": "Serialise",
     "Soccer": "Football",
+    "Soccer ball": "Football",
     "Summarize": "Summarise",
     "Sync": [
       "Synchronisation",
@@ -56,6 +59,7 @@
     "Uncheck": "Untick",
     "Uninitialized": "Uninitialised",
     "Unrecognized": "Unrecognised",
+    "Visualizations": "Visualisations",
     "Visualize": "Visualise",
     "Webpage": [
       "Web Page",
@@ -82,8 +86,14 @@
     "behaviors": "behaviours",
     "canceled": "cancelled",
     "capitalization": "capitalisation",
-    "cart": "basket",
-    "carts": "baskets",
+    "cart": [
+      "basket",
+      "trolley"
+    ],
+    "carts": [
+      "baskets",
+      "trolleys"
+    ],
     "center": "centre",
     "check": "tick",
     "checkbox": "tickbox",
@@ -141,6 +151,7 @@
     "recognize": "recognise",
     "recognized": "recognised",
     "serialize": "serialise",
+    "soccer ball": "football",
     "summarize": "summarise",
     "sync": [
       "synchronisation",
@@ -166,6 +177,7 @@
     "visualization": "visualisation",
     "visualizations": "visualisations",
     "visualize": "visualise",
+    "webmail": "web mail",
     "webpage": "web page",
     "webpages": "web pages",
     "website": "web site",

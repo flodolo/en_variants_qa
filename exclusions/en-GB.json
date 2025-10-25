@@ -13,7 +13,6 @@
     "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte",
     "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-cancel-button.accessKey",
     "toolkit/toolkit/formautofill/formAutofill.ftl:credit-card-capture-save-new-button.accessKey",
-    "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-kb",
     "toolkit/toolkit/pdfviewer/viewer.ftl:pdfjs-document-properties-size-kb"
   ],
   "spelling": [
