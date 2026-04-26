@@ -6,6 +6,7 @@
     "browser/pdfviewer/chrome.properties:open_with_different_viewer.accessKey",
     "browser/pdfviewer/viewer.properties:document_properties_kb",
     "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
+    "devtools/shared/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
     "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte"
   ],
   "spelling": [
@@ -28,6 +29,7 @@
     "devtools/client/webconsole.properties:selfxss.msg",
     "devtools/shared/screenshot.properties:screenshotFileManual",
     "devtools/shared/screenshot.properties:screenshotFilenameManual",
+    "devtools/shared/webconsole.properties:selfxss.msg",
     "mobile/android/chrome/passwordmgr.properties:dontUpdateButton",
     "security/manager/chrome/pipnss/nsserrors.properties:SEC_ERROR_BAD_INFO_ACCESS_LOCATION",
     "security/manager/chrome/pipnss/nsserrors.properties:SEC_ERROR_LIBPKIX_INTERNAL",
