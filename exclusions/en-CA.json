@@ -16,6 +16,7 @@
     "browser/browser/addonNotifications.ftl:addon-downloading-and-verifying",
     "browser/browser/browser.ftl:popup-warning-exceeded-message",
     "browser/browser/browser.ftl:popup-warning-message",
+    "browser/browser/browser.ftl:quickactions-cmd-mute",
     "browser/browser/newtab/newtab.ftl:newtab-wallpaper-blue-flowers",
     "browser/browser/newtab/newtab.ftl:newtab-wallpaper-hot-air-balloons",
     "browser/browser/preferences/formAutofill.ftl:autofill-address-zip",
