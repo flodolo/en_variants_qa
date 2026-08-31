@@ -35,7 +35,6 @@
     "browser/browser/pageInfo.ftl:security-view-privacy-history-value",
     "browser/browser/preferences/fonts.ftl:fonts-sans-serif",
     "browser/browser/preferences/formAutofill.ftl:autofill-address-postal-code",
-    "browser/browser/preferences/preferences.ftl:preferences-data-migration-description",
     "browser/browser/preferences/preferences.ftl:preferences-web-appearance-override-warning",
     "browser/browser/preferences/preferences.ftl:settings-redesign-promo.message",
     "browser/browser/sync.ftl:fxa-menu-send-tab-to-device.label",

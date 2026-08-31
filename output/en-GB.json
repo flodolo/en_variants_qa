@@ -1,4 +1,14 @@
 {
   "case": [],
-  "spelling": []
+  "spelling": [
+    "browser/browser/browser.ftl:urlbar-result-action-calculator-result-3",
+    "browser/browser/newtab/newtab.ftl:newtab-sports-widget-key-date",
+    "browser/browser/newtab/newtab.ftl:newtab-sports-widget-key-date-range",
+    "toolkit/toolkit/neterror/certError.ftl:fp-certerror-expired-what-can-you-do-body",
+    "toolkit/toolkit/neterror/certError.ftl:fp-certerror-expired-why-dangerous-body",
+    "toolkit/toolkit/neterror/certError.ftl:fp-certerror-not-yet-valid-why-dangerous-body",
+    "toolkit/toolkit/neterror/certError.ftl:fp-certerror-pkix-not-yet-valid-what-can-you-do-body",
+    "toolkit/toolkit/neterror/certError.ftl:fp-certerror-pkix-not-yet-valid-why-dangerous-body",
+    "toolkit/toolkit/neterror/certError.ftl:fp-datetime"
+  ]
 }

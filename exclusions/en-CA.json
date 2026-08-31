@@ -1,13 +1,9 @@
 {
   "case": [
-    "browser/browser/pageInfo.ftl:media-file-size",
     "browser/chrome/browser/browser.properties:safebrowsing.notAnAttackButton.accessKey",
-    "browser/installer/override.properties:Kilo",
     "browser/pdfviewer/chrome.properties:open_with_different_viewer.accessKey",
-    "browser/pdfviewer/viewer.properties:document_properties_kb",
     "devtools/client/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
-    "devtools/shared/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip",
-    "toolkit/toolkit/downloads/downloadUtils.ftl:download-utils-kilobyte"
+    "devtools/shared/webconsole.properties:webconsole.cssFilterButton.inactive.tooltip"
   ],
   "spelling": [
     "browser/browser/addonNotifications.ftl:addon-confirm-install-message",
