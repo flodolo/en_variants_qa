@@ -2,19 +2,16 @@
 
 import argparse
 import difflib
-import os
 import json
+import os
 import re
 import subprocess
 import sys
 
-# Import libraries
-try:
-    from compare_locales import parser
-except ImportError as e:
-    print("FATAL: make sure that dependencies are installed")
-    print(e)
-    sys.exit(1)
+from moz.l10n.formats import Format
+from moz.l10n.message import serialize_message
+from moz.l10n.model import Entry, Message
+from moz.l10n.resource import parse_resource
 
 
 class CheckStrings:
@@ -62,36 +59,48 @@ class CheckStrings:
         file_list = self.extractFileList(repository_path)
 
         for file_path in file_list:
-            file_extension = os.path.splitext(file_path)[1]
             file_name = self.getRelativePath(file_path, repository_path)
 
             if file_name.endswith("region.properties"):
                 continue
 
-            file_parser = parser.getParser(file_extension)
-            file_parser.readFile(file_path)
             try:
-                entities = file_parser.parse()
-                for entity in entities:
-                    # Ignore Junk
-                    if isinstance(entity, parser.Junk):
-                        continue
-
-                    string_id = "{}:{}".format(file_name, entity)
-                    if file_extension == ".ftl":
-                        if entity.raw_val != "":
-                            strings[string_id] = entity.raw_val
-                        # Store attributes
-                        for attribute in entity.attributes:
-                            attr_string_id = "{0}:{1}.{2}".format(
-                                file_name, entity, attribute
-                            )
-                            strings[attr_string_id] = attribute.raw_val
-                    else:
-                        strings[string_id] = entity.raw_val
+                resource = parse_resource(file_path)
+                self.parseResource(resource, strings, file_name)
             except Exception as e:
-                print("Error parsing file: {}".format(file_path))
+                print(f"Error parsing resource: {file_path}")
                 print(e)
+
+    def parseResource(self, resource, strings, file_name):
+        """Store strings from a parsed resource"""
+
+        def get_entry_value(value: Message) -> str:
+            return serialize_message(resource.format, value)
+
+        for section in resource.sections:
+            for entry in section.entries:
+                if not isinstance(entry, Entry):
+                    # Ignore comments
+                    continue
+
+                if resource.format == Format.ini:
+                    # Ignore the section name for .ini files
+                    entry_id = ".".join(entry.id)
+                else:
+                    entry_id = ".".join(section.id + entry.id)
+                string_id = f"{file_name}:{entry_id}"
+
+                if entry.properties:
+                    # Store the value of an entry with attributes only if the
+                    # value is not empty.
+                    if not entry.value.is_empty():
+                        strings[string_id] = get_entry_value(entry.value)
+                    for attribute, attr_value in entry.properties.items():
+                        strings[f"{string_id}.{attribute}"] = get_entry_value(
+                            attr_value
+                        )
+                else:
+                    strings[string_id] = get_entry_value(entry.value)
 
     def getRelativePath(self, file_name, repository_path):
         """Get the relative path of a filename"""
@@ -99,6 +108,44 @@ class CheckStrings:
         relative_path = file_name[len(repository_path) + 1 :]
 
         return relative_path
+
+    def buildSpellingRules(self, spelling):
+        """
+        Turn the spelling dictionary into a list of (pattern, replacements)
+        tuples.
+
+        Each word is expanded to cover both a lowercase and an uppercase first
+        character, so the dictionary only needs one entry per word. An
+        explicit entry always wins over a generated one, which makes it
+        possible to define asymmetric replacements (e.g. "counterclockwise"
+        becomes "anti-clockwise", but "Counterclockwise" becomes
+        "Anti-Clockwise").
+        """
+
+        def swap_initial(text):
+            """Swap the case of the first character"""
+
+            return f"{text[0].swapcase()}{text[1:]}" if text else text
+
+        rules = []
+        for word, replacements in spelling.items():
+            if not isinstance(replacements, list):
+                replacements = [replacements]
+            # Negative lookbehind is used to avoid replacing term and variable names
+            rules.append((re.compile(rf"\b(?<![$-]){word}\b"), replacements))
+
+            # Add the variant with a swapped initial, unless it's already
+            # defined explicitly in the dictionary.
+            variant = swap_initial(word)
+            if variant != word and variant not in spelling:
+                rules.append(
+                    (
+                        re.compile(rf"\b(?<![$-]){variant}\b"),
+                        [swap_initial(r) for r in replacements],
+                    )
+                )
+
+        return rules
 
     def compareLocale(self, locale, repository_path, write, update, root_path):
         """Extract strings for locale, compare to reference strings"""
@@ -118,7 +165,7 @@ class CheckStrings:
         # Load spelling changes
         with open(os.path.join(root_path, "spelling", f"{locale}.json")) as f:
             json_data = json.load(f)
-            spelling = json_data["spelling"]
+            spelling_rules = self.buildSpellingRules(json_data["spelling"])
 
         differences = {
             "case": [],
@@ -172,31 +219,14 @@ class CheckStrings:
                     # Initially, the only variation is the source string
                     variations = [source]
 
-                    for word, replacement in spelling.items():
-                        if not isinstance(replacement, list):
+                    for pattern, replacements in spelling_rules:
+                        for replacement in replacements:
                             for v in variations[:]:
-                                # Negative lookbehind is used to avoid replacing term and variable names
-                                tmp_v = re.sub(
-                                    r"\b(?<![$-]){}\b".format(word), replacement, v
-                                )
+                                tmp_v = pattern.sub(replacement, v)
                                 if tmp_v not in variations:
                                     variations.append(tmp_v)
-                        else:
-                            for r in replacement:
-                                for v in variations[:]:
-                                    tmp_v = re.sub(
-                                        r"\b(?<![$-]){}\b".format(word), r, v
-                                    )
-                                    if tmp_v not in variations:
-                                        variations.append(tmp_v)
 
-                    spelling_ok = False
-                    for v in variations:
-                        if translation == v:
-                            spelling_ok = True
-                            break
-
-                    if not spelling_ok:
+                    if translation not in variations:
                         if id in ignored_strings["spelling"]:
                             used_exceptions["spelling"].append(id)
                         else:
@@ -221,7 +251,7 @@ class CheckStrings:
 
             for filename, ids in fixes.items():
                 filename = os.path.join(repository_path, locale, filename)
-                with open(filename, "r") as f:
+                with open(filename) as f:
                     original_content = f.readlines()
 
                 updated_content = []
@@ -231,42 +261,28 @@ class CheckStrings:
                             string_id = id.split(":")[1]
                             if ".properties" in id:
                                 # id = text
-                                pattern = r"^{}(\s*)=(\s*){}(\s*$)".format(
-                                    string_id, locale_strings[id]
-                                )
-                                replacement = r"{}\g<1>=\g<2>{}\g<3>".format(
-                                    string_id, self.reference_strings[id]
-                                )
+                                pattern = rf"^{string_id}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                replacement = rf"{string_id}\g<1>=\g<2>{self.reference_strings[id]}\g<3>"
                                 line = re.sub(pattern, replacement, line)
                             elif ".dtd" in id:
                                 # <!ENTITY id "text"> or <!ENTITY id 'text'>
-                                pattern = r'{}(\s*)("|\'){}("|\')'.format(
-                                    string_id, locale_strings[id]
+                                pattern = (
+                                    rf'{string_id}(\s*)("|\'){locale_strings[id]}("|\')'
                                 )
-                                replacement = r"{}\g<1>\g<2>{}\g<3>".format(
-                                    string_id, self.reference_strings[id]
-                                )
+                                replacement = rf"{string_id}\g<1>\g<2>{self.reference_strings[id]}\g<3>"
                                 line = re.sub(pattern, replacement, line)
                                 # line = line.replace(locale_strings[id], self.reference_strings[id])
                             elif ".ftl" in id:
                                 if "." in string_id:
                                     # Attribute
                                     attribute = string_id.split(".")[1]
-                                    pattern = r"^(\s*)\.{}(\s*)=(\s*){}(\s*$)".format(
-                                        attribute, locale_strings[id]
-                                    )
-                                    replacement = r"\g<1>.{}\g<2>=\g<3>{}\g<4>".format(
-                                        attribute, self.reference_strings[id]
-                                    )
+                                    pattern = rf"^(\s*)\.{attribute}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                    replacement = rf"\g<1>.{attribute}\g<2>=\g<3>{self.reference_strings[id]}\g<4>"
                                     line = re.sub(pattern, replacement, line)
                                 else:
                                     # Value
-                                    pattern = r"^{}(\s*)=(\s*){}(\s*$)".format(
-                                        string_id, locale_strings[id]
-                                    )
-                                    replacement = r"{}\g<1>=\g<2>{}\g<3>".format(
-                                        string_id, self.reference_strings[id]
-                                    )
+                                    pattern = rf"^{string_id}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                    replacement = rf"{string_id}\g<1>=\g<2>{self.reference_strings[id]}\g<3>"
                                     line = re.sub(pattern, replacement, line)
 
                     updated_content.append(line)
