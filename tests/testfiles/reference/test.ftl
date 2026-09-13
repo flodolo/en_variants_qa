@@ -22,3 +22,10 @@ empty-value =
     .label = Favorites
 # DATETIME options are normalized when serializing
 datetime-options = { DATETIME($date, month: "short", day: "numeric") }
+# The lowercase dictionary entry also covers the capitalized word
+capitalized-word = Color
+# A lowercase occurrence in the middle of a string
+lowercase-word = Choose a color
+# Asymmetric replacements are defined explicitly for both cases
+asymmetric-lowercase = Rotate counterclockwise
+asymmetric-capitalized = Counterclockwise rotation

@@ -1,11 +1,16 @@
 {
   "spelling": {
-    "Analyze": "Analyse",
-    "Behavior": "Behaviour",
-    "Center": "Centre",
-    "Color": "Colour",
-    "Customize": "Customise",
-    "Favorites": "Favourites",
-    "dialog": ["dialogue", "box"]
+    "Counterclockwise": "Anti-Clockwise",
+    "analyze": "analyse",
+    "behavior": "behaviour",
+    "center": "centre",
+    "color": "colour",
+    "counterclockwise": "anti-clockwise",
+    "customize": "customise",
+    "dialog": [
+      "dialogue",
+      "box"
+    ],
+    "favorites": "favourites"
   }
 }

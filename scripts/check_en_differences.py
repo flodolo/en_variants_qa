@@ -109,6 +109,44 @@ class CheckStrings:
 
         return relative_path
 
+    def buildSpellingRules(self, spelling):
+        """
+        Turn the spelling dictionary into a list of (pattern, replacements)
+        tuples.
+
+        Each word is expanded to cover both a lowercase and an uppercase first
+        character, so the dictionary only needs one entry per word. An
+        explicit entry always wins over a generated one, which makes it
+        possible to define asymmetric replacements (e.g. "counterclockwise"
+        becomes "anti-clockwise", but "Counterclockwise" becomes
+        "Anti-Clockwise").
+        """
+
+        def swap_initial(text):
+            """Swap the case of the first character"""
+
+            return f"{text[0].swapcase()}{text[1:]}" if text else text
+
+        rules = []
+        for word, replacements in spelling.items():
+            if not isinstance(replacements, list):
+                replacements = [replacements]
+            # Negative lookbehind is used to avoid replacing term and variable names
+            rules.append((re.compile(rf"\b(?<![$-]){word}\b"), replacements))
+
+            # Add the variant with a swapped initial, unless it's already
+            # defined explicitly in the dictionary.
+            variant = swap_initial(word)
+            if variant != word and variant not in spelling:
+                rules.append(
+                    (
+                        re.compile(rf"\b(?<![$-]){variant}\b"),
+                        [swap_initial(r) for r in replacements],
+                    )
+                )
+
+        return rules
+
     def compareLocale(self, locale, repository_path, write, update, root_path):
         """Extract strings for locale, compare to reference strings"""
 
@@ -127,7 +165,7 @@ class CheckStrings:
         # Load spelling changes
         with open(os.path.join(root_path, "spelling", f"{locale}.json")) as f:
             json_data = json.load(f)
-            spelling = json_data["spelling"]
+            spelling_rules = self.buildSpellingRules(json_data["spelling"])
 
         differences = {
             "case": [],
@@ -181,27 +219,14 @@ class CheckStrings:
                     # Initially, the only variation is the source string
                     variations = [source]
 
-                    for word, replacement in spelling.items():
-                        if not isinstance(replacement, list):
+                    for pattern, replacements in spelling_rules:
+                        for replacement in replacements:
                             for v in variations[:]:
-                                # Negative lookbehind is used to avoid replacing term and variable names
-                                tmp_v = re.sub(rf"\b(?<![$-]){word}\b", replacement, v)
+                                tmp_v = pattern.sub(replacement, v)
                                 if tmp_v not in variations:
                                     variations.append(tmp_v)
-                        else:
-                            for r in replacement:
-                                for v in variations[:]:
-                                    tmp_v = re.sub(rf"\b(?<![$-]){word}\b", r, v)
-                                    if tmp_v not in variations:
-                                        variations.append(tmp_v)
 
-                    spelling_ok = False
-                    for v in variations:
-                        if translation == v:
-                            spelling_ok = True
-                            break
-
-                    if not spelling_ok:
+                    if translation not in variations:
                         if id in ignored_strings["spelling"]:
                             used_exceptions["spelling"].append(id)
                         else:

@@ -12,3 +12,7 @@ value-and-attributes = Behaviour
 empty-value =
     .label = Favourites
 datetime-options = { DATETIME($date, day: "numeric", month: "short") }
+capitalized-word = Colour
+lowercase-word = Choose a colour
+asymmetric-lowercase = Rotate anti-clockwise
+asymmetric-capitalized = Anti-Clockwise rotation

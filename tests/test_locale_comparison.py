@@ -56,6 +56,12 @@ class TestLocaleComparison(unittest.TestCase):
             "test.ini:simpleString",
             "test.inc:simpleString",
             "folder/nested.ftl:nested-string",
+            # The capitalized variant is generated from the lowercase entry
+            "test.ftl:capitalized-word",
+            "test.ftl:lowercase-word",
+            # Asymmetric entries are defined explicitly for both cases
+            "test.ftl:asymmetric-lowercase",
+            "test.ftl:asymmetric-capitalized",
         ):
             self.assertNotIn(string_id, all_differences)
 

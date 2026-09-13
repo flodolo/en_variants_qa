@@ -14,7 +14,7 @@ class TestStringExtraction(unittest.TestCase):
     def testReferenceStrings(self):
         strings = self.check.reference_strings
 
-        self.assertEqual(len(strings), 19)
+        self.assertEqual(len(strings), 23)
         self.assertEqual(strings["test.ftl:identical-string"], "Settings")
         self.assertEqual(strings["test.dtd:simple.label"], "Color")
         self.assertEqual(strings["test.properties:simpleString"], "Color")
