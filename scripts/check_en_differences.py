@@ -8,13 +8,10 @@ import re
 import subprocess
 import sys
 
-# Import libraries
-try:
-    from compare_locales import parser
-except ImportError as e:
-    print("FATAL: make sure that dependencies are installed")
-    print(e)
-    sys.exit(1)
+from moz.l10n.formats import Format
+from moz.l10n.message import serialize_message
+from moz.l10n.model import Entry, Message
+from moz.l10n.resource import parse_resource
 
 
 class CheckStrings:
@@ -62,36 +59,48 @@ class CheckStrings:
         file_list = self.extractFileList(repository_path)
 
         for file_path in file_list:
-            file_extension = os.path.splitext(file_path)[1]
             file_name = self.getRelativePath(file_path, repository_path)
 
             if file_name.endswith("region.properties"):
                 continue
 
-            file_parser = parser.getParser(file_extension)
-            file_parser.readFile(file_path)
             try:
-                entities = file_parser.parse()
-                for entity in entities:
-                    # Ignore Junk
-                    if isinstance(entity, parser.Junk):
-                        continue
-
-                    string_id = "{}:{}".format(file_name, entity)
-                    if file_extension == ".ftl":
-                        if entity.raw_val != "":
-                            strings[string_id] = entity.raw_val
-                        # Store attributes
-                        for attribute in entity.attributes:
-                            attr_string_id = "{0}:{1}.{2}".format(
-                                file_name, entity, attribute
-                            )
-                            strings[attr_string_id] = attribute.raw_val
-                    else:
-                        strings[string_id] = entity.raw_val
+                resource = parse_resource(file_path)
+                self.parseResource(resource, strings, file_name)
             except Exception as e:
-                print("Error parsing file: {}".format(file_path))
+                print(f"Error parsing resource: {file_path}")
                 print(e)
+
+    def parseResource(self, resource, strings, file_name):
+        """Store strings from a parsed resource"""
+
+        def get_entry_value(value: Message) -> str:
+            return serialize_message(resource.format, value)
+
+        for section in resource.sections:
+            for entry in section.entries:
+                if not isinstance(entry, Entry):
+                    # Ignore comments
+                    continue
+
+                if resource.format == Format.ini:
+                    # Ignore the section name for .ini files
+                    entry_id = ".".join(entry.id)
+                else:
+                    entry_id = ".".join(section.id + entry.id)
+                string_id = f"{file_name}:{entry_id}"
+
+                if entry.properties:
+                    # Store the value of an entry with attributes only if the
+                    # value is not empty.
+                    if not entry.value.is_empty():
+                        strings[string_id] = get_entry_value(entry.value)
+                    for attribute, attr_value in entry.properties.items():
+                        strings[f"{string_id}.{attribute}"] = get_entry_value(
+                            attr_value
+                        )
+                else:
+                    strings[string_id] = get_entry_value(entry.value)
 
     def getRelativePath(self, file_name, repository_path):
         """Get the relative path of a filename"""
