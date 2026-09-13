@@ -1,0 +1,14 @@
+identical-string = Settings
+case-difference = Add-Ons
+case-exception = BookMarks
+spelling-change = Colour
+spelling-difference = Downloaded files
+spelling-exception = Historical records
+accesskey-string =
+    .label = Analyse
+    .accesskey = a
+value-and-attributes = Behaviour
+    .tooltiptext = Customise the dialogue
+empty-value =
+    .label = Favourites
+datetime-options = { DATETIME($date, day: "numeric", month: "short") }

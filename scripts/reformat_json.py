@@ -28,13 +28,13 @@ def main():
 
     file_list = glob.glob(os.path.join(root_path, "**/*.json"))
     for filename in file_list:
-        with open(filename, "r") as f:
+        with open(filename) as f:
             json_data = json.load(f)
 
         reorder_node(json_data)
 
         with open(filename, "w") as f:
-            json.dump(json_data, f, indent=2, sort_keys=True, ensure_ascii=False),
+            json.dump(json_data, f, indent=2, sort_keys=True, ensure_ascii=False)
 
 
 if __name__ == "__main__":

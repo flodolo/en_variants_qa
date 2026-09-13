@@ -2,8 +2,8 @@
 
 import argparse
 import difflib
-import os
 import json
+import os
 import re
 import subprocess
 import sys
@@ -185,17 +185,13 @@ class CheckStrings:
                         if not isinstance(replacement, list):
                             for v in variations[:]:
                                 # Negative lookbehind is used to avoid replacing term and variable names
-                                tmp_v = re.sub(
-                                    r"\b(?<![$-]){}\b".format(word), replacement, v
-                                )
+                                tmp_v = re.sub(rf"\b(?<![$-]){word}\b", replacement, v)
                                 if tmp_v not in variations:
                                     variations.append(tmp_v)
                         else:
                             for r in replacement:
                                 for v in variations[:]:
-                                    tmp_v = re.sub(
-                                        r"\b(?<![$-]){}\b".format(word), r, v
-                                    )
+                                    tmp_v = re.sub(rf"\b(?<![$-]){word}\b", r, v)
                                     if tmp_v not in variations:
                                         variations.append(tmp_v)
 
@@ -230,7 +226,7 @@ class CheckStrings:
 
             for filename, ids in fixes.items():
                 filename = os.path.join(repository_path, locale, filename)
-                with open(filename, "r") as f:
+                with open(filename) as f:
                     original_content = f.readlines()
 
                 updated_content = []
@@ -240,42 +236,28 @@ class CheckStrings:
                             string_id = id.split(":")[1]
                             if ".properties" in id:
                                 # id = text
-                                pattern = r"^{}(\s*)=(\s*){}(\s*$)".format(
-                                    string_id, locale_strings[id]
-                                )
-                                replacement = r"{}\g<1>=\g<2>{}\g<3>".format(
-                                    string_id, self.reference_strings[id]
-                                )
+                                pattern = rf"^{string_id}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                replacement = rf"{string_id}\g<1>=\g<2>{self.reference_strings[id]}\g<3>"
                                 line = re.sub(pattern, replacement, line)
                             elif ".dtd" in id:
                                 # <!ENTITY id "text"> or <!ENTITY id 'text'>
-                                pattern = r'{}(\s*)("|\'){}("|\')'.format(
-                                    string_id, locale_strings[id]
+                                pattern = (
+                                    rf'{string_id}(\s*)("|\'){locale_strings[id]}("|\')'
                                 )
-                                replacement = r"{}\g<1>\g<2>{}\g<3>".format(
-                                    string_id, self.reference_strings[id]
-                                )
+                                replacement = rf"{string_id}\g<1>\g<2>{self.reference_strings[id]}\g<3>"
                                 line = re.sub(pattern, replacement, line)
                                 # line = line.replace(locale_strings[id], self.reference_strings[id])
                             elif ".ftl" in id:
                                 if "." in string_id:
                                     # Attribute
                                     attribute = string_id.split(".")[1]
-                                    pattern = r"^(\s*)\.{}(\s*)=(\s*){}(\s*$)".format(
-                                        attribute, locale_strings[id]
-                                    )
-                                    replacement = r"\g<1>.{}\g<2>=\g<3>{}\g<4>".format(
-                                        attribute, self.reference_strings[id]
-                                    )
+                                    pattern = rf"^(\s*)\.{attribute}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                    replacement = rf"\g<1>.{attribute}\g<2>=\g<3>{self.reference_strings[id]}\g<4>"
                                     line = re.sub(pattern, replacement, line)
                                 else:
                                     # Value
-                                    pattern = r"^{}(\s*)=(\s*){}(\s*$)".format(
-                                        string_id, locale_strings[id]
-                                    )
-                                    replacement = r"{}\g<1>=\g<2>{}\g<3>".format(
-                                        string_id, self.reference_strings[id]
-                                    )
+                                    pattern = rf"^{string_id}(\s*)=(\s*){locale_strings[id]}(\s*$)"
+                                    replacement = rf"{string_id}\g<1>=\g<2>{self.reference_strings[id]}\g<3>"
                                     line = re.sub(pattern, replacement, line)
 
                     updated_content.append(line)
