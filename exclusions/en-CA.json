@@ -15,6 +15,7 @@
     "browser/browser/newtab/newtab.ftl:newtab-wallpaper-blue-flowers",
     "browser/browser/newtab/newtab.ftl:newtab-wallpaper-hot-air-balloons",
     "browser/browser/preferences/formAutofill.ftl:autofill-address-zip",
+    "browser/browser/preferences/siteDataSettings.ftl:site-data-clear-all-prompt-text",
     "browser/browser/tabbrowser.ftl:tabbrowser-confirm-close-tabs-title",
     "browser/browser/tabbrowser.ftl:tabbrowser-confirm-close-windows-title",
     "browser/browser/tabbrowser.ftl:tabbrowser-ctrl-tab-list-all-tabs.label",
